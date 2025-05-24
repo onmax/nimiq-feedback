@@ -1,6 +1,5 @@
 packages:
   - ./
-  - ./playground
   - ./backend
   - ./widget
 catalog:

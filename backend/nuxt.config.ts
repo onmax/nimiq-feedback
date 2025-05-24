@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     '@nuxthub/core',
+    '@nuxt/content',
   ],
   future: { compatibilityVersion: 4 },
 

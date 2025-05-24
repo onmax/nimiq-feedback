@@ -21,7 +21,9 @@
     "@octokit/rest": "catalog:server",
     "drizzle-orm": "catalog:server",
     "nuxt": "catalog:nuxt",
-    "valibot": "catalog:server"
+    "valibot": "catalog:server",
+    "reka-ui": "catalog:frontend",
+    "@nuxt/content": "^3.5.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
