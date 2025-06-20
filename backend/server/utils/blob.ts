@@ -1,4 +1,5 @@
 import type { InferOutput } from 'valibot'
+import consola from 'consola'
 
 export async function uploadFiles(id: string, { app, type, attachments }: InferOutput<typeof FormSchema>): Result<string[]> {
   const { productionUrl } = useRuntimeConfig()
@@ -7,7 +8,7 @@ export async function uploadFiles(id: string, { app, type, attachments }: InferO
     imagesUrl = new URL('/images/', productionUrl)
   }
   catch (error) {
-    console.error(`Error uploading files: ${JSON.stringify(error)}. To ${productionUrl} - images/`)
+    consola.error(`Error uploading files: ${JSON.stringify(error)}. To ${productionUrl} - images/`)
     throw createError({
       statusCode: 500,
       statusMessage: `Error uploading files: ${JSON.stringify(error)}. To ${productionUrl} - images/`,
@@ -22,7 +23,7 @@ export async function uploadFiles(id: string, { app, type, attachments }: InferO
       filesUrls.push(new URL(`./${hubFile.pathname}`, imagesUrl).toString())
     }
     catch (error) {
-      console.error(`Error uploading file: ${name} to ${hubFile.pathname} - ${imagesUrl}: ${JSON.stringify(error)}`)
+      consola.error(`Error uploading file: ${name} to ${hubFile.pathname} - ${imagesUrl}: ${JSON.stringify(error)}`)
       throw createError({
         statusCode: 500,
         statusMessage: `Error uploading file: ${name} to ${hubFile.pathname} - ${imagesUrl}: ${JSON.stringify(error)}`,
@@ -49,7 +50,7 @@ export async function uploadLogs(id: string, { app, logs }: InferOutput<typeof F
     logsUrl = new URL('/logs/', productionUrl)
   }
   catch (error) {
-    console.error(`Error uploading logs: ${JSON.stringify(error)}. To ${productionUrl} - logs/`)
+    consola.error(`Error uploading logs: ${JSON.stringify(error)}. To ${productionUrl} - logs/`)
     throw createError({
       statusCode: 500,
       statusMessage: `Error uploading logs: ${JSON.stringify(error)}. To ${productionUrl} - logs/`,
@@ -66,7 +67,7 @@ export async function uploadLogs(id: string, { app, logs }: InferOutput<typeof F
       logUrl = new URL(`./${hubFile.pathname}`, logsUrl).toString()
     }
     catch (error) {
-      console.error(`Error uploading log: ${name} to ${hubFile.pathname} - ${logsUrl}: ${JSON.stringify(error)}`)
+      consola.error(`Error uploading log: ${name} to ${hubFile.pathname} - ${logsUrl}: ${JSON.stringify(error)}`)
       throw createError({
         statusCode: 500,
         statusMessage: `Error uploading log: ${name} to ${hubFile.pathname} - ${logsUrl}: ${JSON.stringify(error)}`,

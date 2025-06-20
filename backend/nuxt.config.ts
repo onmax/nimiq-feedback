@@ -46,6 +46,7 @@ export default defineNuxtConfig({
   hub: {
     database: true,
     blob: true,
+    kv: true,
   },
 
   runtimeConfig: {
@@ -78,6 +79,7 @@ export default defineNuxtConfig({
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/javascript',
       },
+      cache: { maxAge: 3600 }, // Cache for 1 hour
       static: true,
     },
     '/widget.css': {
@@ -85,9 +87,11 @@ export default defineNuxtConfig({
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'text/css',
       },
+      cache: { maxAge: 3600 }, // Cache for 1 hour
       static: true,
     },
     '/api/feedback': {
+      // we do also have a rate limit middleware in the server/middleware/rate-limit.ts file
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -95,18 +99,4 @@ export default defineNuxtConfig({
       },
     },
   },
-  // nitro: {
-  //   devHandlers: [{
-  //     route: '/',
-  //     handler: (event) => {
-  //       // https://github.com/nitrojs/nitro/issues/539
-
-  //       setHeader(event, 'Access-Control-Allow-Origin', '*')
-  //       setHeader(event, 'Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-  //       setHeader(event, 'Access-Control-Allow-Headers', '*')
-  //       if (event.method === 'OPTIONS')
-  //         return ''
-  //     },
-  //   }],
-  // },
 })
